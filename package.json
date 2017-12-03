@@ -1,28 +1,28 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-
-  "name": "my-glitch-app",
+  "name": "chatbot-quickly",
   "version": "0.0.1",
-  "description": "What am I about?",
-  "main": "server.js",
+  "description": "A starter kit for building a custom Slack bot with Botkit Studio",
+  "main": "bot.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node bot.js"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "body-parser": "^1.15.2",
+    "botkit": "^0.5",
+    "botkit-storage-mongo": "^1.0.6",
+    "dashbot": "0.7.4",
+    "debug": "^2.3.3",
+    "express": "^4.14.0",
+    "node-env-file": "^0.1.8",
+    "querystring": "^0.2.0",
+    "request": "^2.79.0"
   },
-  "engines": {
-    "node": "8.x"
-  },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/welcome-project"
-  },
-  "license": "MIT",
+  "devDependencies": {},
   "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+    "bots",
+    "chatbots",
+    "slack"
+  ],
+  "author": "eduards@devternity.com",
+  "license": "MIT"
 }
