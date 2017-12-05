@@ -2,6 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var querystring = require('querystring');
 var debug = require('debug')('botkit:webserver');
+var http = require('http');
+var fs = require('fs');
 
 module.exports = function(controller) {
 
@@ -11,28 +13,34 @@ module.exports = function(controller) {
     webserver.use(bodyParser.urlencoded({ extended: true }));
 
     // import express middlewares that are present in /components/express_middleware
-    var normalizedPath = require("path").join(__dirname, "express_middleware");
-    require("fs").readdirSync(normalizedPath).forEach(function(file) {
-        require("./express_middleware/" + file)(webserver, controller);
-    });
+    var normalizedPathToMiddleware = require('path').join(__dirname, 'express_middleware');
+    if (fs.existsSync(normalizedPathToMiddleware)) {
+        fs.readdirSync(normalizedPathToMiddleware).forEach(function(file) {
+            require('./express_middleware/' + file)(webserver, controller);
+        });
+    }
 
     webserver.use(express.static('public'));
 
+    var server = http.createServer(webserver);
 
-    webserver.listen(process.env.PORT || 3000, null, function() {
+    server.listen(process.env.PORT || 3000, null, function() {
 
         debug('Express webserver configured and listening at http://localhost:' + process.env.PORT || 3000);
 
     });
 
     // import all the pre-defined routes that are present in /components/routes
-    var normalizedPath = require("path").join(__dirname, "routes");
-    require("fs").readdirSync(normalizedPath).forEach(function(file) {
-      require("./routes/" + file)(webserver, controller);
-    });
+    var normalizedPathToRoutes = require('path').join(__dirname, 'routes');
+    if (fs.existsSync(normalizedPathToRoutes)) {
+        fs.readdirSync(normalizedPathToRoutes).forEach(function (file) {
+            require('./routes/' + file)(webserver, controller);
+        });
+    }
 
     controller.webserver = webserver;
+    controller.httpserver = server;
 
     return webserver;
 
-}
+};

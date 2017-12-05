@@ -1,31 +1,88 @@
-# Materials for "Chatbot in 20 minutes" presentation
+# THIS IS EXPERIMENTAL SOFTWARE
 
-This repo contains everything you need to get started building a Slack bot with [Botkit](https://botkit.ai). The repo is a modified version of [Botkit Starter Slack](https://github.com/howdyai/botkit-starter-slack) project.
+This is an experimental and in-development version of Botkit. Both this starter kit and the related functionality in Botkit are currently incomplete.
 
-### Getting Started
+However, it works! And we welcome your input.
 
-1. Remix a project on Glitch
+See [this Github Issue](https://github.com/howdyai/botkit/issues/871) to track progress on this project.
 
-[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/eduardsi/chatbot-in-20-mins)
+[View sample app](https://botkit-web.glitch.me/)
 
-2. Change auto-generated project name to one that makes more sense
+# Botkit Starter Kit for Web Bots
 
-### Configure Slack
-1. Create new Slack application [here](https://api.slack.com/apps)
-2. Set `client id` and `client secret` values in `.env` file
-2. Set a nice bot icon
-4. Open `<OAuth & Permissions>` and set redirect url to `<botUrl>/oauth`
-5. Open `<Interactive Components>` and set request url to `<botUrl>/slack/receive`
-6. Open `<Event subscriptions>` and set request url to `<botUrl>/slack/receive`
-7. Open and enable `<Bot User Events>`. Enable events, set request url to `<botUrl>/slack/receive` and include all `/message.*/` workspace events
-8. Open `<Bot Users>`, check `<Always Show My Bot as Online>` and add the bot user
-9. Visit the `<botUrl>` and press `<Add to Slack>`
+This repo contains everything you need to get started building a bot with Botkit and Botkit Studio!
 
-### Let's code!
-1. Invite bot to a channel
-2. Implement [skills/welcome_on_join.js](https://gist.github.com/eduardsi/f2e31b34ad65bb97c949363a972824a5) (reinstall the bot if it doesn work)
-3. Implement [skills/say_something.js](https://gist.github.com/eduardsi/841c35dd500db053fa4cce9ab7db0d8b)
-4. Open `<Slash commands>` and set up `/pic` slash command that points to `<botUrl>/slack/receive`. The Slack should prompt  you to reinstall the bot. Follow `<reinstall>` link
-5. Implement [skills/pic.js](https://gist.github.com/eduardsi/645d6237503912dd190f06f31df1f4f5)
-6. Enhance [skills/pic.js](https://gist.github.com/eduardsi/0f2ea5b0ed0ca49026c0175b5d4ba2fb) with recommendations
-7. Implement [skills/respond_on_endorsement.js](https://gist.github.com/eduardsi/c9ec9fc9865709e5a458446b29143570)
+[Botkit Studio](https://studio.botkit.ai/signup?code=webstarter) is a set of tools that adds capabilities
+to the open source Botkit library by offering hosted GUI interfaces for script
+management and action trigger definition. Botkit Studio is built by the company
+that created and maintains the open source Botkit library, [Howdy.](https://howdy.ai)
+
+### What's Included
+* [Botkit core](https://github.com/howdyai/botkit/blob/master/docs/readme.md#developing-with-botkit) - a complete programming system for building conversational software
+* [Botkit Studio API](https://github.com/howdyai/botkit/blob/master/docs/readme-studio.md#function-index) - additional APIs that extend Botkit with powerful tools and APIs
+* [Pre-configured Express.js webserver](https://expressjs.com/) including:
+   * A customizable "Install my Bot" homepage
+   * Webhook endpoints for communicating with platforms
+* Sample skill modules that demonstrate various features of Botkit
+* A sample web chat client
+
+### Instant Start
+
+[Remix this project on Glitch](https://glitch.com/edit/#!/import/github/howdyai/botkit-starter-web)
+
+[Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/howdyai/botkit-starter-web/master)
+
+### Get Started
+
+Clone this repository:
+
+`git clone https://github.com/howdyai/botkit-starter-web.git`
+
+Install dependencies, including [Botkit](https://github.com/howdyai/botkit):
+
+```
+cd botkit-starter-web
+npm install
+```
+
+Get a Botkit Studio token [from your Botkit developer account](https://studio.botkit.ai/)
+
+Update the `.env` file with your newly acquired token. Also, set the `PORT` to 3000, or your port of choice.
+
+Launch your bot application by typing:
+
+`node .`
+
+Now, visit your new bot's login page: http://localhost:3000
+
+You should see a chat window! Your bot should leap to attention and start talking! YOU MAY HAVE JUST CREATED SKYNET.
+
+Continue your journey to becoming a champion botmaster by [reading the Botkit Studio SDK documentation here.](https://github.com/howdyai/botkit/blob/master/docs/readme-studio.md)
+
+### Extend This Bot
+
+This repo is designed to provide developers a robust starting point for building a custom bot. Included in the code are a set of sample bot "skills" that illustrate various aspects of the Botkit SDK features.  Once you are familiar with how Botkit works, you may safely delete all of the files in the `skills/` subfolder.
+
+Developers will build custom features as modules that live in the `skills/` folder. The main bot application will automatically include any files placed there.
+
+A skill module should be in the format:
+
+```
+module.exports = function(controller) {
+
+    // add event handlers to controller
+    // such as hears handlers that match triggers defined in code
+    // or controller.studio.before, validate, and after which tie into triggers
+    // defined in the Botkit Studio UI.
+
+}
+```
+
+### Customize Storage
+
+By default, the starter kit uses a simple file-system based storage mechanism to
+record information about the teams and users that interact with the bot. While
+this is fine for development, or use by a single team, most developers will want
+to customize the code to use a real database system.
+
+There are [Botkit plugins for all the major database systems](https://github.com/howdyai/botkit/blob/master/docs/readme-middlewares.md#storage-modules) which can be enabled with just a few lines of code.

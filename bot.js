@@ -6,42 +6,6 @@
             \/_____/   \/_____/     \/_/   \/_/\/_/   \/_/     \/_/
 
 
-This is a sample Slack bot built with Botkit.
-
-This bot demonstrates many of the core features of Botkit:
-
-* Connect to Slack using the real time API
-* Receive messages based on "spoken" patterns
-* Reply to messages
-* Use the conversation system to ask questions
-* Use the built in storage system to store and retrieve information
-  for a user.
-
-# RUN THE BOT:
-
-  Create a new app via the Slack Developer site:
-
-    -> http://api.slack.com
-
-  Get a Botkit Studio token from Botkit.ai:
-
-    -> https://studio.botkit.ai/
-
-  Run your bot from the command line:
-
-    clientId=<MY SLACK TOKEN> clientSecret=<my client secret> PORT=<3000> studio_token=<MY BOTKIT STUDIO TOKEN> node bot.js
-
-# USE THE BOT:
-
-    Navigate to the built-in login page:
-
-    https://<myhost.com>/login
-
-    This will authenticate you with Slack.
-
-    If successful, your bot will come online and greet you.
-
-
 # EXTEND THE BOT:
 
   Botkit has many features for building cool and useful bots!
@@ -55,22 +19,19 @@ var env = require('node-env-file');
 env(__dirname + '/.env');
 
 
-/*if (!process.env.clientId || !process.env.clientSecret || !process.env.PORT) {
-  console.log('Error: Specify clientId clientSecret and PORT in environment');
+if (!process.env.PORT) {
+  console.log('Error: Specify studio_token and PORT in environment');
   usage_tip();
   process.exit(1);
-}*/
+}
 
 var Botkit = require('botkit');
 var debug = require('debug')('botkit:main');
 
 var bot_options = {
-    clientId: process.env.clientId,
-    clientSecret: process.env.clientSecret,
-    // debug: true,
-    scopes: ['bot'],
     studio_token: process.env.studio_token,
-    studio_command_uri: process.env.studio_command_uri
+    studio_command_uri: process.env.studio_command_uri,
+    replyWithTyping: false,
 };
 
 // Use a mongo database if specified, otherwise store in a JSON file local to the app.
@@ -83,30 +44,16 @@ if (process.env.MONGO_URI) {
 }
 
 // Create the Botkit controller, which controls all instances of the bot.
-var controller = Botkit.slackbot(bot_options);
-
-controller.startTicking();
+var controller = Botkit.socketbot(bot_options);
 
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
 var webserver = require(__dirname + '/components/express_webserver.js')(controller);
 
-// Set up a simple storage backend for keeping a record of customers
-// who sign up for the app via the oauth
-require(__dirname + '/components/user_registration.js')(controller);
+// Open the web socket server
+controller.openSocketServer(controller.httpserver);
 
-// Send an onboarding message when a new team joins
-require(__dirname + '/components/onboarding.js')(controller);
-
-// no longer necessary since slack now supports the always on event bots
-// // Set up a system to manage connections to Slack's RTM api
-// // This will eventually be removed when Slack fixes support for bot presence
-// var rtm_manager = require(__dirname + '/components/rtm_manager.js')(controller);
-//
-// // Reconnect all pre-registered bots
-// rtm_manager.reconnect();
-
-// Enable Dashbot.io plugin
-require(__dirname + '/components/plugin_dashbot.js')(controller);
+// Start the bot brain in motion!!
+controller.startTicking();
 
 
 var normalizedPath = require("path").join(__dirname, "skills");
@@ -114,7 +61,7 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
   require("./skills/" + file)(controller);
 });
 
-
+console.log('I AM ONLINE! COME TALK TO ME: http://localhost:' + process.env.PORT)
 
 // This captures and evaluates any message sent to the bot as a DM
 // or sent to the bot in the form "@bot message" and passes it to
@@ -123,14 +70,17 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 // You can tie into the execution of the script using the functions
 // controller.studio.before, controller.studio.after and controller.studio.validate
 if (process.env.studio_token) {
-    controller.on('direct_message,direct_mention,mention', function(bot, message) {
-        controller.studio.runTrigger(bot, message.text, message.user, message.channel).then(function(convo) {
+    controller.on('message_received', function(bot, message) {
+        controller.studio.runTrigger(bot, message.text, message.user, message.channel, message).then(function(convo) {
             if (!convo) {
+              // web bot requires a response of some kind!
+              bot.reply(message,'OK');
+
                 // no trigger was matched
                 // If you want your bot to respond to every message,
                 // define a 'fallback' script in Botkit Studio
                 // and uncomment the line below.
-                // controller.studio.run(bot, 'fallback', message.user, message.channel);
+                // controller.studio.run(bot, 'fallback', message.user, message.channel, message);
             } else {
                 // set variables here that are needed for EVERY script
                 // use controller.studio.before('script') to set variables specific to a script
@@ -142,6 +92,11 @@ if (process.env.studio_token) {
         });
     });
 } else {
+
+    controller.on('message_received', function(bot, message) {
+      bot.reply(message, 'I need an API token from Botkit Studio to do more stuff. Get one here: https://studio.botkit.ai')
+    });
+
     console.log('~~~~~~~~~~');
     console.log('NOTE: Botkit Studio functionality has not been enabled');
     console.log('To enable, pass in a studio_token parameter with a token from https://studio.botkit.ai/');
@@ -154,8 +109,7 @@ function usage_tip() {
     console.log('~~~~~~~~~~');
     console.log('Botkit Starter Kit');
     console.log('Execute your bot application like this:');
-    console.log('clientId=<MY SLACK CLIENT ID> clientSecret=<MY CLIENT SECRET> PORT=3000 studio_token=<MY BOTKIT STUDIO TOKEN> node bot.js');
-    console.log('Get Slack app credentials here: https://api.slack.com/apps')
+    console.log('PORT=3000 studio_token=<MY BOTKIT STUDIO TOKEN> node bot.js');
     console.log('Get a Botkit Studio token here: https://studio.botkit.ai/')
     console.log('~~~~~~~~~~');
 }
