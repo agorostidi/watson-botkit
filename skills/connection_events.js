@@ -22,7 +22,7 @@ module.exports = function(controller) {
   });
   
   controller.on('message_received', function(bot, message) {
-    bot.reply(message, 'I heard... something!');
+    //bot.reply(message, 'I heard... something!');
   });
   
   controller.on('direct_message',function(bot,message) {
