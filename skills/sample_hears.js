@@ -15,7 +15,7 @@ module.exports = function(controller) {
     });
   });
   
-  controller.on('ambient',function(bot,message) {
+  controller.hears('ambient','message_received',function(bot,message) {
 
     // do something...
 
@@ -26,6 +26,22 @@ module.exports = function(controller) {
       username: "ReplyBot",
       icon_emoji: ":dash:",
     });
+    
+     var reply_with_attachments = {
+      'username': 'My bot' ,
+      'text': 'This is a pre-text <strong>bold</strong> <a href="http://lorempixel.com/48/48/">a</a> <img src="http://lorempixel.com/48/48/" /> <iframe width="560" height="315" src="https://www.youtube.com/embed/1REwHGEN84k" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>',
+      'attachments': [
+        {
+          'fallback': 'To be useful, I need you to invite me in a channel.',
+          'title': 'How can I help you?',
+          'text': 'To be useful, I need you to invite me in a channel ',
+          'color': '#7CD197'
+        }
+      ],
+      'icon_url': 'http://lorempixel.com/48/48'
+      }
+
+    bot.reply(message, reply_with_attachments);
 
 })
 
