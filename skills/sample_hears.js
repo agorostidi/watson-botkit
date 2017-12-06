@@ -1,7 +1,7 @@
 module.exports = function(controller) {
 
   
-  controller.hears('tacos','direct_mention,direct_message', function(bot, message) {
+  controller.hears('tacos','message_received', function(bot, message) {
 
     bot.startConversation(message, function(err, convo) {
       convo.say('Oh boy, taco time!');
