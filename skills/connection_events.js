@@ -20,6 +20,15 @@ module.exports = function(controller) {
     bot.reply(message, 'Some sub-space interference just caused our connection to be interrupted. But I am back now.');
 
   });
+  
+  controller.on('message_received', function(bot, message) {
+    bot.reply(message, 'I heard... something!');
+  });
+  
+  controller.on('direct_message',function(bot,message) {
+    // reply to _message_ by using the _bot_ object
+    bot.reply(message,'You are talking directly to me');
+  });
 
 
 }
