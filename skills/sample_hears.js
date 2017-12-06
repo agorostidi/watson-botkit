@@ -45,6 +45,36 @@ module.exports = function(controller) {
 
 })
 
+  
+  // Log every message recieved
+controller.middleware.receive.use(function(bot, message, next) {
+
+  // log it
+  console.log('RECEIVED: ', message);
+
+  // modify the message
+  message.logged = true;
+
+  // continue processing the message
+  next();
+
+});
+  
+  
+  // Log every message sent
+controller.middleware.send.use(function(bot, message, next) {
+
+  // log it
+  console.log('SENT: ', message);
+
+  // modify the message
+  message.logged = true;
+
+  // continue processing the message
+  next();
+
+});
+  
   controller.hears('test','message_received', function(bot, message) {
 
     bot.reply(message,'I heard a test');
