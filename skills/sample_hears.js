@@ -329,6 +329,12 @@ controller.hears(['what is my name', 'who am i'], 'message_received', function(b
     bot.reply(message,'I heard a test');
 
   });
+  
+    controller.hears('caballo','message_received', function(bot, message) {
+
+    bot.reply(message,'caballo blanco de bonanzaaa');
+
+  });
 
   controller.hears('typing','message_received', function(bot, message) {
 
