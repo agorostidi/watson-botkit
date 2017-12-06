@@ -75,6 +75,94 @@ controller.middleware.send.use(function(bot, message, next) {
 
 });
   
+  controller.hears('open the (.*) doors',['message_received'],function(bot,message) {
+  var doorType = message.match[1]; //match[1] is the (.*) group. match[0] is the entire group (open the (.*) doors).
+  if (doorType === 'pod bay') {
+    return bot.reply(message, 'I\'m sorry, Dave. I\'m afraid I can\'t do that.');
+  }
+  return bot.reply(message, 'Okay');
+});
+  
+  
+  controller.hears(['question me','preguntame'], 'message_received', function(bot,message) {
+
+  // start a conversation to handle this response.
+  bot.startConversation(message,function(err,convo) {
+
+    convo.addQuestion('Shall we proceed Say YES, NO or DONE to quit.',[
+      {
+        pattern: 'done',
+        callback: function(response,convo) {
+          convo.say('OK you are done!');
+          convo.next();
+        }
+      },
+      {
+        pattern: bot.utterances.yes,
+        callback: function(response,convo) {
+          convo.say('Great! I will continue...');
+          // do something else...
+          convo.next();
+
+        }
+      },
+      {
+        pattern: bot.utterances.no,
+        callback: function(response,convo) {
+          convo.say('Perhaps later.');
+          // do something else...
+          convo.next();
+        }
+      },
+      {
+        default: true,
+        callback: function(response,convo) {
+          // just repeat the question
+          convo.repeat();
+          convo.next();
+        }
+      }
+    ],{},'default');
+    
+    convo.addQuestion('Shall 2 we proceed Say YES, NO or DONE to quit.',[
+      {
+        pattern: 'done',
+        callback: function(response,convo) {
+          convo.say('OK you are done!');
+          convo.next();
+        }
+      },
+      {
+        pattern: bot.utterances.yes,
+        callback: function(response,convo) {
+          convo.say('Great! I will continue...');
+          // do something else...
+          convo.next();
+
+        }
+      },
+      {
+        pattern: bot.utterances.no,
+        callback: function(response,convo) {
+          convo.say('Perhaps later.');
+          // do something else...
+          convo.next();
+        }
+      },
+      {
+        default: true,
+        callback: function(response,convo) {
+          // just repeat the question
+          convo.repeat();
+          convo.next();
+        }
+      }
+    ],{},'default');
+
+  })
+
+});
+  
   controller.hears('test','message_received', function(bot, message) {
 
     bot.reply(message,'I heard a test');
