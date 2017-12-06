@@ -194,12 +194,14 @@ controller.hears(['call me (.*)', 'my name is (.*)'], 'message_received', functi
 controller.hears(['what is my name', 'who am i'], 'message_received', function(bot, message) {
 
     controller.storage.users.get(message.user, function(err, user) {
-        if (user && user.name) {
+      console.log(message);
+      if (user && user.name) {
             //bot.reply(message, 'Your name is ' + user.name);
         //} else {
             bot.startConversation(message, function(err, convo) {
                 if (!err) {
                     convo.say('I do not know your name yet!');
+                  convo.addMessage('message added');
                     convo.ask('What should I call you?', function(response, convo) {
                         convo.ask('You want me to call you `' + response.text + '`?', [
                             {
