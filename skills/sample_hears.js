@@ -14,6 +14,20 @@ module.exports = function(controller) {
       });
     });
   });
+  
+  controller.on('ambient',function(bot,message) {
+
+    // do something...
+
+    // then respond with a message object
+    //
+    bot.reply(message,{
+      text: "A more complex response",
+      username: "ReplyBot",
+      icon_emoji: ":dash:",
+    });
+
+})
 
   controller.hears('test','message_received', function(bot, message) {
 
