@@ -13,14 +13,6 @@ module.exports = function(controller) {
                 title: 'Test',
                 payload: 'test'
             },
-            {
-                title: 'Test a',
-                payload: 'azul_caballo_blanco'
-            },
-            {
-                title: 'Test b',
-                payload: 'este es un caballo blanco'
-            },
         ]
       },function() {});
 
