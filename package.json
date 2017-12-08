@@ -4,7 +4,7 @@
   "description": "A starter kit for building a custom bot for your website with Botkit Studio",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "PORT=3000 node bot.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
