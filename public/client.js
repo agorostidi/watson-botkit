@@ -8,7 +8,7 @@
         max_reconnect: 5
       },
       options: {
-        sound: false,
+        sound: true,
         use_sockets: true
       },
       reconnect_count: 0,

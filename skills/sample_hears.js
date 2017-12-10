@@ -4,6 +4,7 @@ module.exports = function(controller) {
   
   let ingredients_menu = {
     text: '¡Elige un ingrediente!',
+    typingDelay: 3000,
     quick_replies: [
         {
             title: 'Mozzarella',
@@ -41,10 +42,7 @@ module.exports = function(controller) {
 
     ingredients.push(message.text);
     
-    bot.reply(message,{
-      text: '¿Quieres más ingredientes?',
-      typingDelay: 5000,
-    });
+    bot.reply(message,'¿Quieres más ingredientes?');
     bot.reply(message, ingredients_menu);
   });
 
@@ -54,8 +52,8 @@ module.exports = function(controller) {
     bot.reply(message,ingredients.join())
     
     bot.reply(message,{
-      text: '¡enseguida la tendrás lista. Mientras diviértete en <a href="http://youtube.com" target="_blank">YouTube</a>',
-      typingDelay: 5000,
+      text: '¡Enseguida la tendrás lista!. Mientras diviértete en <a href="http://youtube.com" target="_blank">YouTube</a>',
+      typingDelay: 3000,
     });
 
   
