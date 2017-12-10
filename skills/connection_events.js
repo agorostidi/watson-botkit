@@ -3,7 +3,7 @@ module.exports = function(controller) {
   controller.on('hello', function(bot, message) {
 
     // a new session with an unknown user has begun
-    bot.reply(message, 'Hello! I am a Botkit bot! Please configure me to do something useful.');
+    //bot.reply(message, 'Hello! I am a Botkit bot! Please configure me to do something useful.');
 
   });
 

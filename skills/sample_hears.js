@@ -1,5 +1,12 @@
 module.exports = function(controller) {
 
+  
+  controller.hears(['pina','mozarrella','pepperoni'],['message_received'],function(bot,message) {
+    console.log(message);
+    bot.reply(message, 'Eres un exótico');
+    bot.reply(message, '¿Quieres más ingredientes?');
+    //bot.reply(message, ingredients);
+  });
 
   controller.hears('test','message_received', function(bot, message) {
 
