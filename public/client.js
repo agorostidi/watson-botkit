@@ -97,7 +97,7 @@
       },
       getHistory: function(guid) {
         that = this;
-        if (that.guid) {
+        /*if (that.guid) {
           that.request('/botkit/history',{user: that.guid}).then(function(history) {
             if (history.success) {
               that.trigger('history_loaded', history.history);
@@ -107,7 +107,7 @@
           }).catch(function(err) {
             that.trigger('history_error', err);
           });
-        }
+        }*/
       },
       webhook: function(message) {
         that = this;
