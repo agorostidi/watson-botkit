@@ -1,10 +1,10 @@
 # THIS IS EXPERIMENTAL SOFTWARE
 
-This is an experimental and in-development version of Botkit. Both this starter kit and the related functionality in Botkit are currently incomplete.
+This is an experimental and in-development version of Botkit using the Watson Assistant Middleware. Both this starter kit and the related functionality in Botkit are currently incomplete.
 
 However, it works! And we welcome your input.
 
-See [this Github Issue](https://github.com/howdyai/botkit/issues/871) to track progress on this project.
+See [this Github Issue](https://github.com/agorostidi/watson-botkit/issues) to track progress on this project.
 
 [View sample app](https://botkit-web.glitch.me/)
 
@@ -16,6 +16,7 @@ This repo contains everything you need to get started building a bot with Botkit
 to the open source Botkit library by offering hosted GUI interfaces for script
 management and action trigger definition. Botkit Studio is built by the company
 that created and maintains the open source Botkit library, [Howdy.](https://howdy.ai)
+
 
 ### What's Included
 * [Botkit core](https://github.com/howdyai/botkit/blob/master/docs/readme.md#developing-with-botkit) - a complete programming system for building conversational software
@@ -30,22 +31,22 @@ that created and maintains the open source Botkit library, [Howdy.](https://howd
 
 [Remix this project on Glitch](https://glitch.com/edit/#!/import/github/howdyai/botkit-starter-web)
 
-[Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/howdyai/botkit-starter-web/master)
+[Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/agorostidi/watson-botkit)
 
 ### Get Started
 
 Clone this repository:
 
-`git clone https://github.com/howdyai/botkit-starter-web.git`
+`git clone https://github.com/agorostidi/watson-botkit.git`
 
 Install dependencies, including [Botkit](https://github.com/howdyai/botkit):
 
 ```
-cd botkit-starter-web
+cd watson-botkit
 npm install
 ```
 
-Get a Botkit Studio token [from your Botkit developer account](https://studio.botkit.ai/)
+OPTONAL: Get a Botkit Studio token [from your Botkit developer account](https://studio.botkit.ai/)
 
 Update the `.env` file with your newly acquired token. Also, set the `PORT` to 3000, or your port of choice.
 
