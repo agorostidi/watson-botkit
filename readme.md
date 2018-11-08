@@ -7,7 +7,9 @@ However, it works! And we welcome your input.
 
 See [this Github Issue](https://github.com/agorostidi/watson-botkit/issues) to track progress on this project.
 
-[View sample app](https://botkit-web.glitch.me/)
+Check [Watson Assistant BotKit midleware](https://github.com/watson-developer-cloud/botkit-middleware/) in order to check how Watson Assistant is used
+
+Please, do not forget to follow the pre-requisites above and create your own Watson Assistant
 
 # Botkit Starter Kit for Web Bots
 
@@ -28,11 +30,6 @@ that created and maintains the open source Botkit library, [Howdy.](https://howd
 * Sample skill modules that demonstrate various features of Botkit
 * A sample web chat client
 
-### Instant Start
-
-[Remix this project on Glitch](https://glitch.com/edit/#!/import/github/howdyai/botkit-starter-web)
-
-[Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/agorostidi/watson-botkit)
 
 ### Get Started
 
@@ -50,6 +47,8 @@ npm install
 OPTONAL: Get a Botkit Studio token [from your Botkit developer account](https://studio.botkit.ai/)
 
 Update the `.env` file with your newly acquired token. Also, set the `PORT` to 3000, or your port of choice.
+ 
+Create your own Watson Assistant instance and setup your first dialog there  (that will be used by the chatbot).  Insert the credentials of Watson Assistant on your  `.env` file
 
 Launch your bot application by typing:
 
@@ -59,7 +58,7 @@ Now, visit your new bot's login page: http://localhost:3000
 
 You should see a chat window! Your bot should leap to attention and start talking! YOU MAY HAVE JUST CREATED SKYNET.
 
-Continue your journey to becoming a champion botmaster by [reading the Botkit Studio SDK documentation here.](https://github.com/howdyai/botkit/blob/master/docs/readme-studio.md)
+If you prefer, you can go the page http://localhost:3000/embedded.html to see a version of the chatbot embeed on a web page.
 
 ### Extend This Bot
 
