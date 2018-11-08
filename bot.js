@@ -26,6 +26,15 @@ if (!process.env.PORT) {
 }
 
 var Botkit = require('botkit');
+
+var watsonMiddleware = require('botkit-middleware-watson')({
+    iam_apikey: process.env.wa_iam_apikey,
+    url: process.env.wa_url,
+    workspace_id: process.env.wa_workspace_id,
+    version: '2018-07-10',
+    minimum_confidence: 0.50, // (Optional) Default is 0.75
+  });
+
 var debug = require('debug')('botkit:main');
 
 var bot_options = {
@@ -52,8 +61,13 @@ var webserver = require(__dirname + '/components/express_webserver.js')(controll
 // Open the web socket server
 controller.openSocketServer(controller.httpserver);
 
+// Load Watson Middleware ( see )
+controller.middleware.receive.use(watsonMiddleware.receive);
+//controller.startRTM();
+
 // Start the bot brain in motion!!
 controller.startTicking();
+
 
 
 var normalizedPath = require("path").join(__dirname, "skills");
