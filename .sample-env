@@ -1,0 +1,13 @@
+# Environment Config
+
+# store your secrets and config variables in here
+# only invited collaborators will be able to see your .env values
+# reference these in your code with process.env.SECRET
+
+studio_token=
+PORT=3000
+
+wa_iam_apikey='P1E9qHsSIn0bZf_cxIzIGxZ3ISFAjgl0mc9PrP9lwkk3'
+wa_url='https://gateway-fra.watsonplatform.net/assistant/api'
+wa_workspace_id='095211a2-310f-4c54-a61b-e78869c4365d'
+
