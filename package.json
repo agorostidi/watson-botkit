@@ -1,7 +1,7 @@
 {
-  "name": "botkit-starter-web",
-  "version": "0.0.2",
-  "description": "A starter kit for building a custom bot for your website with Botkit Studio",
+  "name": "watson-botkit",
+  "version": "0.0.3",
+  "description": "A starter kit for building a custom bot for your website with Botkit Studio and Watson Assistant",
   "main": "bot.js",
   "scripts": {
     "start": "PORT=3000 node bot.js"
@@ -21,17 +21,18 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/howdyai/botkit-starter-web.git"
+    "url": "https://github.com/agorostidi/watson-botkit.git"
   },
   "bugs": {
-    "url": "https://github.com/howdyai/botkit-starter-web/issues"
+    "url": "https://github.com/agorostidi/watson-botkit/issues"
   },
   "homepage": "https://github.com/howdyai/botkit-starter-web",
   "keywords": [
     "bots",
     "chatbots",
-    "web chat"
+    "web chat",
+    "watson assistant"
   ],
-  "author": "ben@howdy.ai",
+  "author": "andres.gorostidi@es.ibm.co ",
   "license": "ISC"
 }
