@@ -30,6 +30,22 @@ that created and maintains the open source Botkit library, [Howdy.](https://howd
 * Sample skill modules that demonstrate various features of Botkit
 * A sample web chat client
 
+## Prerequisites
+
+1. Sign up for an [IBM Cloud account](https://console.bluemix.net/registration/).
+1. Download the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview).
+1. Create an instance of the Watson Assistant service and get your credentials:
+    - Go to the [Watson Assistant](https://console.bluemix.net/catalog/services/conversation) page in the IBM Cloud Catalog.
+    - Log in to your IBM Cloud account.
+    - Click **Create**.
+    - Click **Show** to view the service credentials.
+    - Copy the `apikey` value, or copy the `username` and `password` values if your service instance doesn't provide an `apikey`.
+    - Copy the `url` value.
+
+1. Create a workspace using the Watson Assistant service and copy the `workspace_id`.
+
+Once you have create your own Watson Assistant instance, you may setup your first dialog there  (that will be used by the chatbot).  Insert the credentials of Watson Assistant on your  `.env` file so it points to that dialog.
+
 
 ### Get Started
 
@@ -44,11 +60,10 @@ cd watson-botkit
 npm install
 ```
 
-OPTONAL: Get a Botkit Studio token [from your Botkit developer account](https://studio.botkit.ai/)
+OPTIONAL: Get a Botkit Studio token [from your Botkit developer account](https://studio.botkit.ai/)
 
 Update the `.env` file with your newly acquired token. Also, set the `PORT` to 3000, or your port of choice.
  
-Create your own Watson Assistant instance and setup your first dialog there  (that will be used by the chatbot).  Insert the credentials of Watson Assistant on your  `.env` file
 
 Launch your bot application by typing:
 
